@@ -1,0 +1,78 @@
+﻿@page "/Sunday"
+<h1>Sunday</h1>
+<h2>Stretch and Mobility workout</h2>
+
+<table class="table">
+    <thead>
+        <tr style="cursor:pointer;">
+            <th>Type</th>
+            <th>Exercise</th>
+            <th>Duration</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Exercise exercise in Workout)
+        {
+            <tr style="cursor:pointer">
+                <td>@exercise.type</td>
+                <td>@exercise.exercise</td>
+                <td>@exercise.duration</td>
+                <td>@exercise.notes</td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+@code {
+    class Exercise
+    {
+        public string type;
+        public string exercise;
+        public string duration;
+        public string notes;
+
+        public Exercise(string Type, string Exercise, string Duration, string Notes)
+        {
+            type = Type; exercise = Exercise; duration = Duration; notes = Notes;
+        }
+    }
+    List<Exercise> Workout = new List<Exercise>();
+
+    protected override void OnInitialized()
+    {
+        Workout.Add(new Exercise("Warm-up", "March in Place + Arm Swings", "2 min", "Lift knees gently, swing arms across chest and overhead"));
+        Workout.Add(new Exercise("Warm-up", "Shoulder Rolls + Neck Circles", "2 min", "Roll shoulders backward, gently circle neck side to side"));
+        Workout.Add(new Exercise("Warm-up", "Standing Cat-Cow", "1–2 min", "Hands on thighs, alternate arching and rounding back (gentle!)"));
+        Workout.Add(new Exercise("Warm-up", "Hip Circles (Standing)", "1–2 min", "Circle hips slowly both directions, feet wide"));
+        Workout.Add(new Exercise("Warm-up", "Torso Rotations (Gentle)", "1–2 min", "Hands at chest, twist gently side to side, feet planted"));
+
+        Workout.Add(new Exercise("", "", "", ""));
+
+        Workout.Add(new Exercise("Mobility Flow", "World’s Greatest Stretch (Modified)", "1 min/side", "Lunge forward, one hand on floor, twist gently upward, hold"));
+        Workout.Add(new Exercise("Mobility Flow", "90/90 Hip Rotations (Seated)", "2 min", "Sit on floor with front and back leg bent at 90°. Rotate knees side to side"));
+        Workout.Add(new Exercise("Mobility Flow", "Glute Bridge (Slow Reps)", "2 x 10 reps", "Lie on back, squeeze glutes to lift hips. Great for hips and core"));
+        Workout.Add(new Exercise("Mobility Flow", "Thread the Needle (on all fours)", "1 min/side", "Reach one arm under, gently twist torso — keep back flat"));
+        Workout.Add(new Exercise("Mobility Flow", "Wall Slides or Floor Angels", "1–2 min", "Sit/stand against wall, slide arms up and down. Improve shoulder mobility"));
+        Workout.Add(new Exercise("Mobility Flow", "Active Hamstring Stretch (Leg Swings Lying Down)", "1 min/leg", "Lying on back, extend one leg up, lower slowly. Keep core engaged"));
+        Workout.Add(new Exercise("Mobility Flow", "Ankle Mobility (Rocking Lunge)", "1 min/side", "In lunge, gently push front knee forward (past toes), keeping heel down"));
+
+        Workout.Add(new Exercise("", "", "", ""));
+
+        Workout.Add(new Exercise("Deep Static Stretching", "Child’s Pose or Supine Knee-to-Chest", "60-90 sec", "Gently stretch lower back. Use pillow under hips if needed"));
+        Workout.Add(new Exercise("Deep Static Stretching", "Seated Forward Fold", "60-90 sec", "Sit with legs straight, hinge from hips forward. Don’t round back"));
+        Workout.Add(new Exercise("Deep Static Stretching", "Seated Figure 4 Stretch", "60-90 sec", "Cross ankle over opposite thigh, gently press knee away"));
+        Workout.Add(new Exercise("Deep Static Stretching", "Hip Flexor Stretch (Standing or Kneeling)", "60-90 sec", "One foot forward in lunge, tuck pelvis, feel stretch in rear leg hip"));
+        Workout.Add(new Exercise("Deep Static Stretching", "Lying Spinal Twist (Gentle)", "60-90 sec", "Lie on back, drop knees to one side, arms out wide"));
+        Workout.Add(new Exercise("Deep Static Stretching", "Calf Stretch (Wall or Step)", "60-90 sec", "Press back heel down, front knee bent, both feet forward"));
+        Workout.Add(new Exercise("Deep Static Stretching", "Side Stretch (Standing or Seated)", "60-90 sec", "Reach one arm overhead, lean gently to opposite side"));
+        Workout.Add(new Exercise("Deep Static Stretching", "Chest Opener (Hands Clasped Behind Back)", "60-90 sec", "Interlace fingers behind back, open chest and shoulders"));
+
+        Workout.Add(new Exercise("", "", "", ""));
+
+        Workout.Add(new Exercise("Relaxation and Breathwork", "Lying Down with Deep Breathing", "3–5 min", "Lie on your back, hands on belly, inhale slowly for 4 sec, exhale for 6 sec"));
+        Workout.Add(new Exercise("Relaxation and Breathwork", "Legs Up Wall (Viparita Karani)", "3–5 min", "Lie on your back with legs resting up a wall. Promotes circulation and calm"));
+        Workout.Add(new Exercise("Relaxation and Breathwork", "Optional: Body Scan Meditation", "5 min", "Mentally scan your body from toes to head, releasing tension as you go"));
+    }
+}

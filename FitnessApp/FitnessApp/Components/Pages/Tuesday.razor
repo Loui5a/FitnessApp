@@ -1,0 +1,88 @@
+﻿@page "/Tuesday"
+<h1>Tuesday</h1>
+<h2>Upper Extremities Dumbbell workout</h2>
+
+<table class="table">
+    <thead>
+        <tr style="cursor:pointer;">
+            <th>Type</th>
+            <th>Exercise</th>
+            <th>Duration</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Exercise exercise in Workout)
+        {
+            <tr style="cursor:pointer">
+                <td>@exercise.type</td>
+                <td>@exercise.exercise</td>
+                <td>@exercise.duration</td>
+                <td>@exercise.notes</td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+@code {
+    class Exercise
+    {
+        public string type;
+        public string exercise;
+        public string duration;
+        public string notes;
+
+        public Exercise(string Type, string Exercise, string Duration, string Notes)
+        {
+            type = Type; exercise = Exercise; duration = Duration; notes = Notes;
+        }
+    }
+    List<Exercise> Workout = new List<Exercise>();
+
+    protected override void OnInitialized()
+    {
+        Workout.Add(new Exercise("Warm-up", "Arm Circles", "30 sec forward + 30 sec backward", "Keep shoulders relaxed"));
+        Workout.Add(new Exercise("Warm-up", "Shoulder Rolls", "30 sec forward + 30 sec backward", "Keep shoulders relaxed"));
+        Workout.Add(new Exercise("Warm-up", "Neck Tilts (Side to Side)", "30 sec", "Keep shoulders relaxed"));
+        Workout.Add(new Exercise("Warm-up", "Neck Turns (L/R)", "30 sec", "Keep shoulders relaxed"));
+        Workout.Add(new Exercise("Warm-up", "Wall Angels", "1 min", "Keep shoulders relaxed"));
+        Workout.Add(new Exercise("Warm-up", "Shoulder Shrugs", "1 min", "Keep shoulders relaxed"));
+        Workout.Add(new Exercise("Warm-up", "Cat-Cow (on all fours)", "1 min", "Keep shoulders relaxed"));
+
+        Workout.Add(new Exercise("", "", "", ""));
+
+        Workout.Add(new Exercise("Chest", "Dumbbell Chest Press", "10-15 reps, 2 sets", "Lying on a bench or floor"));
+        Workout.Add(new Exercise("Chest", "Dumbbell Chest Fly", "10-12 reps, 2 sets", "Slight bend in elbows"));
+
+        Workout.Add(new Exercise("", "", "", ""));
+
+        Workout.Add(new Exercise("Arms", "Bicep Curls", "10-15 reps, 2 sets", "Palms up."));
+        Workout.Add(new Exercise("Arms", "Hammer Curls", "10-12 reps, 2 sets", "Neutral grip."));
+        Workout.Add(new Exercise("Arms", "Tricep Kickbacks", "10-12 reps, 2 sets", "Flat back, hinge at hips."));
+        Workout.Add(new Exercise("Arms", "Overhead Tricep Extension", "10-15 reps, 2 sets", "One or both dumbbells overhead."));
+
+        Workout.Add(new Exercise("", "", "", ""));
+
+        Workout.Add(new Exercise("Shoulders", "Dumbbell Shoulder Press", "10-12 reps, 2 sets", "Elbows at 90° to start"));
+        Workout.Add(new Exercise("Shoulders", "Lateral Raises", "10-12 reps, 2 sets", "Light weight, slow and controlled"));
+        Workout.Add(new Exercise("Shoulders", "Front Raises", "10-12 reps, 2 sets", "Palms down, raise to shoulder height"));
+        Workout.Add(new Exercise("Shoulders", "Reverse Flys", "10-12 reps, 2 sets", "Focus on upper back and rear delts"));
+
+        Workout.Add(new Exercise("", "", "", ""));
+
+        Workout.Add(new Exercise("Postural Focus", "Dumbbell Shrugs", "12-15 reps, 2 sets", "Slowly lift shoulders up and down"));
+        Workout.Add(new Exercise("Postural Focus", "Farmer’s Carry", "60 sec walk, 2 sets", "Keep neck neutral, engage core"));
+        Workout.Add(new Exercise("Postural Focus", "Bent-Over Rows", "´10-12 reps, 2 sets", "Squeeze shoulder blades back"));
+
+        Workout.Add(new Exercise("", "", "", ""));
+
+        Workout.Add(new Exercise("Cool Down and Stretching", "Neck Stretch (Side Tilt)", "30 sec per side", "Gently assist with hand"));
+        Workout.Add(new Exercise("Cool Down and Stretching", "Upper Trap Stretch", "30 sec per side", "Pull head diagonally"));
+        Workout.Add(new Exercise("Cool Down and Stretching", "Shoulder Stretch (Arm Across Chest)", "30 sec per side", "Relax shoulder"));
+        Workout.Add(new Exercise("Cool Down and Stretching", "Chest Stretch (Wall or doorway)", "30 sec per side", "Feel stretch across pecs"));
+        Workout.Add(new Exercise("Cool Down and Stretching", "Child’s Pose", "1 min", "Rest arms forward, relax neck"));
+        Workout.Add(new Exercise("Cool Down and Stretching", "Deep Breathing", "2 min", "Inhale 4 sec, exhale 6 sec"));
+
+    }
+}

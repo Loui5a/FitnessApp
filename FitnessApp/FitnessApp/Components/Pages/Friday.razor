@@ -1,0 +1,63 @@
+﻿@page "/Friday"
+<h1>Friday</h1>
+<h2>Full Body Dumbbell workout</h2>
+
+<table class="table">
+    <thead>
+        <tr style="cursor:pointer;">
+            <th>Type</th>
+            <th>Exercise</th>
+            <th>Duration</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Exercise exercise in Workout)
+        {
+            <tr style="cursor:pointer">
+                <td>@exercise.type</td>
+                <td>@exercise.exercise</td>
+                <td>@exercise.duration</td>
+                <td>@exercise.notes</td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+@code {
+    class Exercise
+    {
+        public string type;
+        public string exercise;
+        public string duration;
+        public string notes;
+
+        public Exercise(string Type, string Exercise, string Duration, string Notes)
+        {
+            type = Type; exercise = Exercise; duration = Duration; notes = Notes;
+        }
+    }
+    List<Exercise> Workout = new List<Exercise>();
+
+    protected override void OnInitialized()
+    {
+        Workout.Add(new Exercise("Warm-up", "March in place or light step taps", "1 min", ""));
+        Workout.Add(new Exercise("Warm-up", "Shoulder rolls (forward and backward)", "1 min", ""));
+        Workout.Add(new Exercise("Warm-up", "Arm circles + chest openers", "1 min", "connect hands behind your back, squeeze the shoulderblades together."));
+        Workout.Add(new Exercise("Warm-up", "Hip circles", "1 min", ""));
+        Workout.Add(new Exercise("Warm-up", "Cat-Cow stretches", "1 min", "on all fours — gently for spine mobility."));
+
+        Workout.Add(new Exercise("", "", "", ""));
+
+        Workout.Add(new Exercise(" Circuit 1 – Upper Body Push (Shoulders & Chest)", "Seated Dumbbell Shoulder Press", "10–12 reps, 3 sets", "sit upright, back supported if needed, Keep core engaged, elbows at 90 degrees"));
+        Workout.Add(new Exercise(" Circuit 1 – Upper Body Push (Shoulders & Chest)", "Incline Chest Press", "10 reps, 3 sets", "on a bench or floor with a cushion behind upper back, Press up with controlled movement"));
+        Workout.Add(new Exercise(" Circuit 1 – Upper Body Push (Shoulders & Chest)", "Front Raise", "8 reps/arm, 3 sets", "one arm at a time, alternating, void leaning back; keep light weight"));
+
+        Workout.Add(new Exercise("", "", "", ""));
+
+        Workout.Add(new Exercise("Circuit 2 – Lower Body (Knee-dominant)", "Dumbbell Goblet Squat", "12-12 reps, 3 sets", "hold dumbbell at chest, close to body, Only squat to a depth that feels comfortable"));
+        Workout.Add(new Exercise("Circuit 2 – Lower Body (Knee-dominant)", "Dumbbell Goblet Squat", "12-12 reps, 3 sets", "hold dumbbell at chest, close to body, Only squat to a depth that feels comfortable"));
+        Workout.Add(new Exercise("Circuit 2 – Lower Body (Knee-dominant)", "Dumbbell Goblet Squat", "12-12 reps, 3 sets", "hold dumbbell at chest, close to body, Only squat to a depth that feels comfortable"));
+    }
+}
