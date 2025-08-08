@@ -12,8 +12,8 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["FitnessApp/FitnessApp/FitnessApp.csproj", "FitnessApp/FitnessApp/"]
-COPY ["FitnessApp/FitnessApp.Client/FitnessApp.Client.csproj", "FitnessApp/FitnessApp.Client/"]
+COPY ["./FitnessApp/FitnessApp/FitnessApp.csproj", "FitnessApp/FitnessApp/"]
+COPY ["./FitnessApp/FitnessApp.Client/FitnessApp.Client.csproj", "FitnessApp/FitnessApp.Client/"]
 RUN dotnet restore "./FitnessApp/FitnessApp/FitnessApp.csproj"
 COPY . .
 WORKDIR "/src/FitnessApp/FitnessApp"
