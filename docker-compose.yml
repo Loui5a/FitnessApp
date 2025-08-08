@@ -1,0 +1,14 @@
+services:
+  fitnessapp:
+    # remember to create a env-file
+    env_file: "fitnessapp.env"
+    image: ${DOCKER_REGISTRY-}fitnessapp
+    build:
+      context: .
+      dockerfile: FitnessApp/FitnessApp/Dockerfile
+  db:
+    # remember to create a env-file
+    env_file: "fitnessapp.env"
+    image: ${DOCKER_REGISTRY-}postgres
+    volumes:
+    - ./db_data:/var/lib/postgresql/data 

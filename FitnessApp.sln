@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp", "FitnessApp\Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Client", "FitnessApp\FitnessApp.Client\FitnessApp.Client.csproj", "{AE4F9DCC-38D6-4245-8AA1-27BD54C5EEED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Database", "FitnessApp.Database\FitnessApp.Database.csproj", "{24A3A901-1845-439C-B310-EF04DA7416FA}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{AE4F9DCC-38D6-4245-8AA1-27BD54C5EEED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE4F9DCC-38D6-4245-8AA1-27BD54C5EEED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE4F9DCC-38D6-4245-8AA1-27BD54C5EEED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24A3A901-1845-439C-B310-EF04DA7416FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24A3A901-1845-439C-B310-EF04DA7416FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24A3A901-1845-439C-B310-EF04DA7416FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24A3A901-1845-439C-B310-EF04DA7416FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -42,34 +42,44 @@
 
     protected override void OnInitialized()
     {
-        Workout.Add(new Exercise("Warm-up and Mobility", "Bodyweight Squats (to chair if needed)", "1 min", "Sit back into your hips, keeping spine neutral. Arms forward for balance. Only go as low as is comfortable."));
-        Workout.Add(new Exercise("Warm-up and Mobility", "Marching in Place w/ Arm Swings", "1-2 min", "Light cardio to warm up hips, knees, and heart rate."));
-        Workout.Add(new Exercise("Warm-up and Mobility", "Standing Hip Circles", "1 min", "Hands on hips, rotate each leg slowly in/out to mobilize hip joint."));
-        Workout.Add(new Exercise("Warm-up and Mobility", "Glute Bridges (on floor or elevated)", "1-2 min", "Lie on your back, knees bent, lift hips by squeezing glutes. Avoid arching lower back."));
-        Workout.Add(new Exercise("Warm-up and Mobility", "World’s Greatest Stretch (Modified)", "3 min", "Lunge forward, rotate slightly toward front leg, raise opposite arm. Helps hips and thoracic spine. Avoid deep twisting."));
+        Workout.Add(new Exercise("Warm-up and Mobility", "Marching in Place w/ Arm Swings", "1-2 min, 2 rounds", "Light cardio to warm up hips, knees, and heart rate."));
+        Workout.Add(new Exercise("Warm-up and Mobility", "Bodyweight Squats", "15 reps, 2 rounds", "Sit back into your hips, keeping spine neutral. Arms forward for balance. Only go as low as is comfortable."));
+        Workout.Add(new Exercise("Warm-up and Mobility", "High Knees in Place", "1 min, 2 rounds", "Jog in place, bringing your knees up to waist level quickly."));
+        Workout.Add(new Exercise("Warm-up and Mobility", "Standing Hip Circles", "10 reps/leg, 2 rounds", "Hands on hips, rotate each leg slowly in/out to mobilize hip joint."));
+        Workout.Add(new Exercise("Warm-up and Mobility", "Leg swing", "10 reps/legs, 2 rounds", "Stand tall and swing one leg forward and back like a pendulum. Use a wall or chair for balance."));
+        Workout.Add(new Exercise("Warm-up and Mobility", "Glute Bridges", "15 reps, 2 rounds", "Lie on your back, knees bent, feet flat. Drive through your heels to lift your hips up, squeezing glutes at the top"));
+        Workout.Add(new Exercise("Warm-up and Mobility", "World’s Greatest Stretch", "1 min/leg, 2 rounds", "Lunge forward, rotate slightly toward front leg, raise opposite arm. Helps hips and thoracic spine. Avoid deep twisting."));
+
 
         Workout.Add(new Exercise("", "", "", ""));
 
-        Workout.Add(new Exercise("Quads and Glutes", "Dumbbell Goblet Squat (to box/chair)", "10-12 reps, 2 sets", "Hold 1 dumbbell at chest, squat down to a bench or chair.Keep spine tall, knees tracking over toes."));
-        Workout.Add(new Exercise("Quads and Glutes", "Glute Bridge March (BW or light DB on hips)", "10 reps/leg, 2 sets", "From a glute bridge position, lift one leg at a time. Keep pelvis stable. Strengthens glutes and stabilizers."));
+        Workout.Add(new Exercise("Superset 1 - Quads and Glutes", "Dumbbell Goblet Squat", "12 reps, 3 sets", "Hold one dumbbell at your chest. Keep chest up, feet shoulder-width apart. Sit hips back and down into a squat. Drive through heels to stand."));
+        Workout.Add(new Exercise("Superset 1 - Quads and Glutes", "Weighted Glute Bridge", "15 reps, 3 sets", "Lie on your back, knees bent, feet flat. Place dumbbell on hips. Press through heels to lift hips, squeeze glutes at top, and lower down slowly."));
 
         Workout.Add(new Exercise("", "", "", ""));
 
-        Workout.Add(new Exercise("Hamstrings and Posterior Chain", "Dumbbell Romanian Deadlift (RDL), short range", "10-12 reps, 2 sets", "Use light–moderate dumbbells. Hinge only as far as you can keep a flat back. Slight bend in knees."));
-        Workout.Add(new Exercise("Hamstrings and Posterior Chain", "Step-Ups (to low step or box)", "8-10 reps/leg, 2 sets", "Step up with right leg, drive through heel, return. Hold dumbbells at sides. Keep torso upright."));
+        Workout.Add(new Exercise("Superset 2 - Hamstrings and Core", "Dumbbell Romanian Deadlift (RDL)", "10-12 reps, 3 sets", "Hold dumbbells in front of thighs. Soften knees, push hips back (not down), keep back straight, lower dumbbells to mid-shin. Return by squeezing glutes."));
+        Workout.Add(new Exercise("Superset 2 - Hamstrings and Core", "Bird Dog Hold (Bodyweight)", "20 sec/leg, 3 sets", "On hands and knees, extend opposite arm and leg. Keep spine neutral. Hold, then switch"));
 
         Workout.Add(new Exercise("", "", "", ""));
 
-        Workout.Add(new Exercise("Lateral and Unilaterial Strength", "Dumbbell Supported Bulgarian Split Squat (rear foot on chair)", "8–10/leg, 2 sets", "Hold 1 DB on the working leg side. Go shallow if needed. Use chair/wall support for balance."));
-        Workout.Add(new Exercise("Lateral and Unilaterial Strength", "Side-Lying Leg Raises (Bodyweight or Ankle Weights)", "12–15/leg, 2 sets", "Lie on side, lift top leg slowly. Focus on glute medius activation."));
+        Workout.Add(new Exercise("Superset 3 - Glutes and Balance", "Dumbbell Reverse Lunges", "8–10/leg, 3 sets", "Hold dumbbells at your sides, Step one leg back and lower your body until both knees are at about 90°, Push through the front heel to return to standing, Alternate legs or do all reps on one side."));
+        Workout.Add(new Exercise("Superset 3 - Glutes and Balance", "Single-Leg Dumbbell Deadlift", "8/leg, 3 sets", "Hold dumbbell in opposite hand of standing leg. Hinge forward from hips, extend non-weighted leg back. Keep spine straight and core tight."));
 
         Workout.Add(new Exercise("", "", "", ""));
 
-        Workout.Add(new Exercise("Core and Balance", "Hamstring Stretch (Seated or Standing)", "1 min/leg", "Keep back straight, reach gently toward toes."));
-        Workout.Add(new Exercise("Core and Balance", "Hip Flexor Stretch (Standing or Kneeling)", "1 min/leg", "Avoid overarching your back. Tuck pelvis slightly."));
-        Workout.Add(new Exercise("Core and Balance", "Glute Stretch (Seated Figure 4 or Lying Down)", "1 min/leg", "Stretch hip rotators gently, no twisting."));
-        Workout.Add(new Exercise("Core and Balance", "Calf Stretch (Wall or Step)", "1 min/leg", "Keep heel down and back straight."));
-        Workout.Add(new Exercise("Core and Balance", "Child’s Pose or Supine Knee Hugs", "2 min", "Relax lower back. If child’s pose bothers your back, lie on your back and hug knees in."));
+        Workout.Add(new Exercise("SUperset 4 - Lateral Strength and Calves", "Dumbbell Lateral Lunges", "10 reps/leg, 3 sets", "Step out to the side, push hips back into a side lunge. Push off foot to return to center. Hold dumbbells at sides or in goblet position."));
+        Workout.Add(new Exercise("Superset 4 - Lateral Stength and Calves", "Dumbbell Calf Raises", "15-20 reps, 3 sets", "Stand with dumbbells at sides. Raise heels off the ground, pause at top, then lower slowly."));
 
+        Workout.Add(new Exercise("", "", "", ""));
+
+        Workout.Add(new Exercise("Cool Down", "Hamstring Stretch", "1 min/leg", "Sit down, Keep back straight, reach gently toward toes."));
+        Workout.Add(new Exercise("Cool Down", "Kneeling Hip Flexor Stretch", "1 min/leg", "Kneel on one knee, push hips forward, stretch front of hip."));
+        Workout.Add(new Exercise("Cool Down", "Figure-4 Glute Stretch", "1 min/leg", "Lie on your back, cross one ankle over opposite thigh, pull the leg toward you."));
+        Workout.Add(new Exercise("Cool Down", "Calf Stretch (Wall or Step)", "1 min/leg", "Keep heel down and back straight."));
+        Workout.Add(new Exercise("Cool Down", "Child’s Pose or Supine Knee Hugs", "2 min", "Relax lower back. If child’s pose bothers your back, lie on your back and hug knees in."));
+
+
+        Workout = Workout.OrderBy(e => e.type).ToList();
     }
 }
