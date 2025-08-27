@@ -13,7 +13,10 @@ namespace FitnessApp.Database.Models
         public required string Category { get; set; }
         public required string Exercise { get; set; }
         public required string DefaultDuration { get; set; }
-        public required string DefaultReps { get; set; }
         public required string Description { get; set; }
+
+        public ICollection<RecordLogModel>? RecordLogs { get; }
+
+        public ICollection<ProgramEntryModel>? ProgramEntries { get; }
     }
 }

@@ -1,5 +1,8 @@
 
 using FitnessApp.Components;
+using FitnessApp.Database;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.FluentUI.AspNetCore.Components;
 
 namespace FitnessApp
 {
@@ -11,8 +14,14 @@ namespace FitnessApp
 
             // Add services to the container.
             builder.Services.AddRazorComponents()
-                .AddInteractiveWebAssemblyComponents();
+                .AddInteractiveWebAssemblyComponents()
+                .AddInteractiveServerComponents();
 
+            builder.Services.AddDataGridEntityFrameworkAdapter();
+            builder.Services.AddFluentUIComponents(options =>
+            {
+                options.ValidateClassNames = false;
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -34,7 +43,11 @@ namespace FitnessApp
 
             app.MapRazorComponents<App>()
                 .AddInteractiveWebAssemblyRenderMode()
-                .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
+                .AddAdditionalAssemblies(typeof(Client._Imports).Assembly)
+                .AddInteractiveServerRenderMode();
+
+            var context = new FitnessContext();
+            context.Database.Migrate();
 
             app.Run();
         }

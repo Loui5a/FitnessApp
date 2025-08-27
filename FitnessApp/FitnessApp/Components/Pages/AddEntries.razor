@@ -1,0 +1,106 @@
+﻿@page "/AddEntries"
+@using FitnessApp.Database.Models
+@rendermode InteractiveServer
+
+
+<h2>Add exercises to database</h2>
+
+<body>
+    <EditForm Model="Model" OnValidSubmit="Submit" FormName="ExerciseAdd">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div>
+            <label class="EntriesLabel">
+                Type:
+                <br />
+                <InputText placeholder="Ex. lower extremities" @bind-Value="Model.Type" />
+            </label>
+        </div>
+        <div>
+            <label class="EntriesLabel">
+                Category:
+                <br />
+                <InputText placeholder="Ex. warm-up" @bind-Value="Model.Category" />
+            </label>
+        </div>
+        <div>
+            <label class="EntriesLabel">
+                Exercise:
+                <br />
+                <InputText placeholder="Ex. dumbbell curls" size="60" @bind-Value="Model.Exercise" />
+            </label>
+        </div>
+        <div>
+            <label class="EntriesLabel">
+                Default Duration:
+                <br />
+                <InputText placeholder="Ex 12 reps, 3 sets" @bind-Value="Model.DefaultDuration" />
+            </label>
+        </div>
+        <div>
+            <label class="EntriesLabel">
+                Description:
+                <br />
+                <InputText placeholder="Describe how to perform the exercise" size="100" @bind-Value="Model.Description" />
+            </label>
+            <br />
+        </div>
+        <div>
+            <button type="submit">Submit</button> 
+        </div>
+    </EditForm>
+
+</body>
+
+<FluentAccordion>
+    <FluentAccordionItem Heading="Filter(s)" Expanded="true">
+        <FluentIcon Value="@(new Icons.Regular.Size20.FilterAdd())" Color="@Color.Neutral" Slot="start" />
+        <FluentGrid Spacing="1" Justify="JustifyContent.FlexStart" Style="padding: 10px;">
+            <FluentGridItem xs="12" sm="6" md="4">
+                <FluentTextField @bind-Value=_TypeFilter Label="Exercise Filter"></FluentTextField>
+            </FluentGridItem>
+        </FluentGrid>
+        <FluentStack Orientation="Orientation.Horizontal" HorizontalAlignment="HorizontalAlignment.End">
+            <FluentButton IconStart="@(new Icons.Regular.Size16.Broom())"
+                          Disabled="loading"
+                          OnClick="ClearFilters">
+                Clear
+            </FluentButton>
+            <FluentButton IconStart="@(new Icons.Regular.Size16.ArrowClockwise())"
+                          Appearance="Appearance.Accent"
+                          Loading="loading"
+                          OnClick="DataGridRefreshDataAsync">
+                Search
+            </FluentButton>
+        </FluentStack>
+    </FluentAccordionItem>
+</FluentAccordion>
+<br />
+<div style="height: 484px; overflow:auto;" tabindex="-1">
+    <FluentDataGrid @ref="dataGrid"
+                    Items="Exercises"
+                    RefreshItems="RefreshItemsAsync"
+                    OnRowDoubleClick="@(()=>Console.WriteLine("Row double clicked!"))"
+                    RowSize="DataGridRowSize.Small"
+                    GenerateHeader="GenerateHeaderOption.Sticky"
+                    TGridItem="ExerciseModel"
+                    Loading="loading"
+                    Pagination="pagination">
+        <PropertyColumn Property="@(c => c!.Type)" />
+        <PropertyColumn Property="@(c => c!.Category)" />
+        <PropertyColumn Property="@(c => c!.Exercise)" />
+        <PropertyColumn Title="Duration" Property="@(c => c!.DefaultDuration)" Tooltip="true" />
+        <PropertyColumn Property="@(c => c!.Description)" />
+        <TemplateColumn Title="Actions" Align="@Align.End">
+            <FluentButton aria-label="Edit item" IconEnd="@(new Icons.Regular.Size16.Edit())" OnClick="@(() => Console.WriteLine("Edit clicked"))" />
+            <FluentButton aria-label="Delete item" IconEnd="@(new Icons.Regular.Size16.Delete())" OnClick="@(() => Delete(context.Id))" />
+        </TemplateColumn>
+    </FluentDataGrid>
+</div>
+<FluentPaginator State="@pagination" />
+
+
+
+@code {
+
+}

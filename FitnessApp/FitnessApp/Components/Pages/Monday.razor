@@ -1,14 +1,19 @@
-﻿@page "/Monday"
+﻿@* @page "/Monday"
 <h1>Monday</h1>
 <h2>Lower Extremities Dumbbell workout</h2>
+
+
+
+
 
 <table class="table">
     <thead>
         <tr style="cursor:pointer;">
             <th>Type</th>
+            <th>Category</th>
             <th>Exercise</th>
             <th>Duration</th>
-            <th>Notes</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -16,6 +21,7 @@
         {
             <tr style="cursor:pointer">
                 <td>@exercise.type</td>
+                <td>@exercise.category</td>
                 <td>@exercise.exercise</td>
                 <td>@exercise.duration</td>
                 <td>@exercise.notes</td>
@@ -29,20 +35,21 @@
     class Exercise
     {
         public string type;
+        public string category;
         public string exercise;
         public string duration;
         public string notes;
 
-        public Exercise(string Type, string Exercise, string Duration, string Notes)
+        public Exercise(string Type, string Category, string Exercise, string Duration, string Notes)
         {
-            type = Type; exercise = Exercise; duration = Duration; notes = Notes;
+            type = Type; category = Category; exercise = Exercise; duration = Duration; notes = Notes;
         }
     }
     List<Exercise> Workout = new List<Exercise>();
 
     protected override void OnInitialized()
     {
-        Workout.Add(new Exercise("Warm-up and Mobility", "Marching in Place w/ Arm Swings", "1-2 min, 2 rounds", "Light cardio to warm up hips, knees, and heart rate."));
+        Workout.Add(new Exercise("Legs","Warm-up and Mobility", "Marching in Place w/ Arm Swings", "1-2 min, 2 rounds", "Light cardio to warm up hips, knees, and heart rate."));
         Workout.Add(new Exercise("Warm-up and Mobility", "Bodyweight Squats", "15 reps, 2 rounds", "Sit back into your hips, keeping spine neutral. Arms forward for balance. Only go as low as is comfortable."));
         Workout.Add(new Exercise("Warm-up and Mobility", "High Knees in Place", "1 min, 2 rounds", "Jog in place, bringing your knees up to waist level quickly."));
         Workout.Add(new Exercise("Warm-up and Mobility", "Standing Hip Circles", "10 reps/leg, 2 rounds", "Hands on hips, rotate each leg slowly in/out to mobilize hip joint."));
@@ -80,6 +87,6 @@
         Workout.Add(new Exercise("Cool Down", "Child’s Pose or Supine Knee Hugs", "2 min", "Relax lower back. If child’s pose bothers your back, lie on your back and hug knees in."));
 
 
-        Workout = Workout.OrderBy(e => e.type).ToList();
+        //Workout = Workout.OrderBy(e => e.type).ToList();
     }
-}
+} *@
