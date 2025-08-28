@@ -12,7 +12,6 @@ namespace FitnessApp.Components.Pages
     public partial class AddEntries : ComponentBase
     {
         FluentDataGrid<ExerciseModel> dataGrid = default!;
-        //IQueryable<ExerciseModel> ExerciseItems = default!;
         bool loading = true;
         PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
         string? _TypeFilter = "";
@@ -38,7 +37,7 @@ namespace FitnessApp.Components.Pages
             if (req.SortByColumn != null && !string.IsNullOrEmpty(sort.PropertyName))
             {
                 query = req.GetSortByProperties().FirstOrDefault().Direction != SortDirection.Descending
-                    ? query.OrderBy(e => req.SortByColumn)
+                    ? query .OrderBy(e => req.SortByColumn)
                     : query.OrderByDescending(e => req.SortByColumn);
             }
 

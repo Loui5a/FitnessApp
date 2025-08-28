@@ -1,0 +1,40 @@
+﻿@page "/ProgramEntries"
+@using FitnessApp.Database.Models
+@rendermode InteractiveServer
+
+
+<FluentAccordionItem Heading="" Expanded="true">
+    <FluentIcon Value="@(new Icons.Regular.Size20.FilterAdd())" Color="@Color.Neutral" Slot="start" />
+    <FluentGrid Spacing="1" Justify="JustifyContent.FlexStart" Style="padding: 10px;">
+        <FluentGridItem xs="12" sm="6" md="4">
+            <FluentTextField @bind-Value=_TypeFilter Label="Workout name"></FluentTextField>
+        </FluentGridItem>
+    </FluentGrid>
+    <div style="height: 484px; overflow:auto;" tabindex="-1">
+        <FluentDataGrid @ref="dataGrid"
+                        Items="Exercises"
+                        RefreshItems="RefreshItemsAsync"
+                        RowSize="DataGridRowSize.Small"
+                        GenerateHeader="GenerateHeaderOption.Sticky"
+                        TGridItem="ExerciseModel"
+                        Loading="loading"
+                        Pagination="pagination">
+            <PropertyColumn Property="@(c => c!.Type)" Sortable="true" />
+            <PropertyColumn Property="@(c => c!.Category)" Sortable="true" />
+            <PropertyColumn Property="@(c => c!.Exercise)" Sortable="true" />
+        </FluentDataGrid>
+    </div>
+    <FluentStack Orientation="Orientation.Horizontal" HorizontalAlignment="HorizontalAlignment.End">
+        <FluentButton IconStart="@(new Icons.Regular.Size16.Broom())"
+                        Disabled="loading"
+                        OnClick="ClearFilters">
+            Clear
+        </FluentButton>
+        <FluentButton IconStart="@(new Icons.Regular.Size16.ArrowClockwise())"
+                        Appearance="Appearance.Accent"
+                        Loading="loading"
+                        OnClick="DataGridRefreshDataAsync">
+            Create workout
+        </FluentButton>
+    </FluentStack>
+</FluentAccordionItem>

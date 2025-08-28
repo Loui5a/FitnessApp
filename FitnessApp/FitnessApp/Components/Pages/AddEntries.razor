@@ -86,9 +86,9 @@
                     TGridItem="ExerciseModel"
                     Loading="loading"
                     Pagination="pagination">
-        <PropertyColumn Property="@(c => c!.Type)" />
-        <PropertyColumn Property="@(c => c!.Category)" />
-        <PropertyColumn Property="@(c => c!.Exercise)" />
+        <PropertyColumn Property="@(c => c!.Type)" Sortable="true" />
+        <PropertyColumn Property="@(c => c!.Category)" Sortable="true" />
+        <PropertyColumn Property="@(c => c!.Exercise)" Sortable="true" />
         <PropertyColumn Title="Duration" Property="@(c => c!.DefaultDuration)" Tooltip="true" />
         <PropertyColumn Property="@(c => c!.Description)" />
         <TemplateColumn Title="Actions" Align="@Align.End">
