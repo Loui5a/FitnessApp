@@ -11,6 +11,6 @@ namespace FitnessApp.Database.Models
         public int Id { get; set; }
         public required string Name { get; set; }
 
-        public ICollection<ProgramEntryModel>? ProgramEntries { get; }
+        public ICollection<ProgramEntryModel>? ProgramEntries { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using static System.Net.WebRequestMethods;
 
+
 namespace FitnessApp.Components.Pages
 {
     public partial class AddEntries : ComponentBase
@@ -15,11 +16,14 @@ namespace FitnessApp.Components.Pages
         bool loading = true;
         PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
         string? _TypeFilter = "";
+        string? _CategoryFilter = "";
+        string? _ExerciseFilter = "";
 
         [SupplyParameterFromForm]
         private ExercisePlaceholder Model { get; set; } = new();
         private IQueryable<ExerciseModel>? Exercises { get; set; }
-        FitnessContext context = new FitnessContext();
+        [Inject]
+        FitnessContext ContextExerciseEntry { get; set; } = default!;
         GridItemsProviderRequest<ExerciseModel>? CurrentReq;
 
         protected async Task RefreshItemsAsync(GridItemsProviderRequest<ExerciseModel> req)
@@ -27,11 +31,22 @@ namespace FitnessApp.Components.Pages
             loading = true;
             await InvokeAsync(StateHasChanged);
 
-            var query = context.ExerciseModels.Skip(req.StartIndex).Take(req.Count ?? 10);
+            var query = ContextExerciseEntry.ExerciseModels.Skip(req.StartIndex).Take(req.Count ?? 10);
 
 
             if (!string.IsNullOrWhiteSpace(_TypeFilter))
+            {
                 query = query.Where(e => e.Type.Contains(_TypeFilter));
+            }
+                
+            else if(!string.IsNullOrWhiteSpace(_CategoryFilter))
+            {
+                query = query.Where(e => e.Category.Contains(_CategoryFilter));
+            }
+            else if (!string.IsNullOrWhiteSpace(_ExerciseFilter))
+            {
+                query = query.Where(e => e.Exercise.Contains(_ExerciseFilter));
+            }
 
             var sort = req.GetSortByProperties().FirstOrDefault();
             if (req.SortByColumn != null && !string.IsNullOrEmpty(sort.PropertyName))
@@ -53,6 +68,8 @@ namespace FitnessApp.Components.Pages
         public void ClearFilters()
         {
             _TypeFilter = null;
+            _CategoryFilter = null;
+            _ExerciseFilter = null;
         }
 
         public async Task DataGridRefreshDataAsync()
@@ -62,7 +79,7 @@ namespace FitnessApp.Components.Pages
 
         private async Task Submit()
         {
-            context.ExerciseModels.Add(new ExerciseModel
+            ContextExerciseEntry.ExerciseModels.Add(new ExerciseModel
             {
                 Type = Model.Type!,
                 Category = Model.Category!,
@@ -70,16 +87,16 @@ namespace FitnessApp.Components.Pages
                 DefaultDuration = Model.DefaultDuration!,
                 Description = Model.Description!,
             });
-            await context.SaveChangesAsync();
+            await ContextExerciseEntry.SaveChangesAsync();
             Model = new();
             await OnInitializedAsync();
         }
 
         public async Task Delete(int exerciseId)
         {
-            var exercise = await context.ExerciseModels.FirstAsync(e => e.Id == exerciseId);
-            context.ExerciseModels.Remove(exercise);
-            await context.SaveChangesAsync();
+            var exercise = await ContextExerciseEntry.ExerciseModels.FirstAsync(e => e.Id == exerciseId);
+            ContextExerciseEntry.ExerciseModels.Remove(exercise);
+            await ContextExerciseEntry.SaveChangesAsync();
             if (CurrentReq is null)
             {
                 await OnInitializedAsync();
@@ -92,7 +109,7 @@ namespace FitnessApp.Components.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            Exercises = context.ExerciseModels.AsQueryable();
+            Exercises = ContextExerciseEntry.ExerciseModels.AsQueryable();
             await InvokeAsync(StateHasChanged);
         }
 

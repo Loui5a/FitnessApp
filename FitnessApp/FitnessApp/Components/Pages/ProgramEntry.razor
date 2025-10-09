@@ -1,0 +1,49 @@
+﻿@page "/ProgramEntry"
+@using FitnessApp.Database.Models
+@rendermode InteractiveServer
+<h2>Create or Edit Programs</h2>
+<FluentDialogProvider @rendermode="RenderMode.InteractiveServer" />
+<FluentStack Orientation="Orientation.Horizontal" HorizontalAlignment="HorizontalAlignment.Left">
+    <FluentSelect TOption="ProgramModel"
+                  Label="Select a program"
+                  Items="@Programs"
+                  Id="programs-listbox"
+                  Width="200px"
+                  Height="250px"
+                  Placeholder="Make a selection..."
+                  OptionText="@(p => p.Name)"
+                  @bind-SelectedOption="@ActiveProgram" 
+    />
+                  
+    <FluentButton IconStart="@(new Icons.Regular.Size16.Add())"
+                    Disabled="loading"
+                  OnClick="AddProgram">
+        Add
+    </FluentButton>
+    <FluentButton IconStart="@(new Icons.Regular.Size16.Delete())"
+                    Appearance="Appearance.Accent"
+                    Loading="loading"
+                  OnClick="DeleteProgramAsync">
+        Delete
+    </FluentButton>
+</FluentStack>
+<FluentGrid Justify="JustifyContent.FlexStart" Spacing="3">
+    <FluentGridItem xs="12" sm="6">
+        <h5>Exercises</h5>
+        <FluentSortableList Id="Exercises" Group="cloning" Clone="true" OnRemove="@AddToProgram" Items="@AllExercises" Context="exercise">
+            <ItemTemplate>@exercise.Exercise</ItemTemplate>
+        </FluentSortableList>
+    </FluentGridItem>
+    <FluentGridItem xs="12" sm="6">
+        <h5>Program</h5>
+        <FluentSortableList Id="programs" Group="cloning" OnUpdate="@ReorderProgramExercises" OnRemove="@RemoveFromProgram" Items="@ProgramExercises" Context="exercise">
+            <ItemTemplate>@exercise.Exercise</ItemTemplate>
+        </FluentSortableList>
+    </FluentGridItem>
+    <FluentButton IconStart="@(new Icons.Regular.Size16.Add())"
+                  Appearance="Appearance.Accent"
+                  Loading="loading"
+                  OnClick="Submit">
+        Submit
+    </FluentButton>
+</FluentGrid>

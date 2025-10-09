@@ -57,7 +57,13 @@
         <FluentIcon Value="@(new Icons.Regular.Size20.FilterAdd())" Color="@Color.Neutral" Slot="start" />
         <FluentGrid Spacing="1" Justify="JustifyContent.FlexStart" Style="padding: 10px;">
             <FluentGridItem xs="12" sm="6" md="4">
-                <FluentTextField @bind-Value=_TypeFilter Label="Exercise Filter"></FluentTextField>
+                <FluentTextField @bind-Value=_TypeFilter Label="Filter according to type"></FluentTextField>
+            </FluentGridItem>
+            <FluentGridItem xs="12" sm="6" md="4">
+                <FluentTextField @bind-Value=_CategoryFilter Label="Filter according to category"></FluentTextField>
+            </FluentGridItem>
+            <FluentGridItem xs="12" sm="6" md="4">
+                <FluentTextField @bind-Value=_ExerciseFilter Label="Filter according to exercise"></FluentTextField>
             </FluentGridItem>
         </FluentGrid>
         <FluentStack Orientation="Orientation.Horizontal" HorizontalAlignment="HorizontalAlignment.End">
@@ -75,7 +81,8 @@
         </FluentStack>
     </FluentAccordionItem>
 </FluentAccordion>
-<br />
+<br /> 
+
 <div style="height: 484px; overflow:auto;" tabindex="-1">
     <FluentDataGrid @ref="dataGrid"
                     Items="Exercises"

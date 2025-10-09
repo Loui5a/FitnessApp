@@ -6,6 +6,10 @@ namespace FitnessApp.Database
 {
     public class FitnessContext : DbContext
     {
+        public FitnessContext(DbContextOptions<FitnessContext> options)
+        : base(options)
+        {
+        }
         public DbSet<ExerciseModel> ExerciseModels { get; set; }
         public DbSet<ProgramEntryModel> ProgramLogModels { get; set; }
         public DbSet<ProgramModel> ProgramModels { get; set; }

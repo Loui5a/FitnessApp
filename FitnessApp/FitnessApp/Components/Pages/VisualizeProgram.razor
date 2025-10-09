@@ -1,0 +1,52 @@
+﻿@page "/VisualizeProgram"
+@using FitnessApp.Database.Models
+@rendermode InteractiveServer
+
+<h2>Visualize Programs</h2>
+@if (loading is true)
+{
+    <FluentProgressRing></FluentProgressRing>
+}
+else
+{
+    <FluentStack Orientation="Orientation.Horizontal" HorizontalAlignment="HorizontalAlignment.Left">
+        <FluentSelect TOption="ProgramModel"
+                      Label="Select a program"
+                      Items="@Programs"
+                      Id="programs-listbox"
+                      Width="200px"
+                      Height="250px"
+                      Placeholder="Make a selection..."
+                      SelectedOptionChanged="OnProgramChangeAsync"
+                      OptionText="@(p => p.Name)"
+                      />
+    </FluentStack>
+    @if (loadingProgram is false)
+    {
+        if (Exercises is not null)
+        {
+            <div style="height: 484px; overflow:auto;" tabindex="-1">
+                <FluentDataGrid @ref="dataGrid"
+                                Items="Exercises"
+                                RowSize="DataGridRowSize.Small"
+                                GenerateHeader="GenerateHeaderOption.Sticky"
+                                TGridItem="ExerciseModel"
+                                Loading="loadingProgram">
+
+                    <PropertyColumn Property="@(c => c!.Type)" Sortable="true" />
+                    <PropertyColumn Property="@(c => c!.Category)" Sortable="true" />
+                    <PropertyColumn Property="@(c => c!.Exercise)" Sortable="true" />
+                    <PropertyColumn Title="Duration" Property="@(c => c!.DefaultDuration)" Tooltip="true" />
+                    <PropertyColumn Property="@(c => c!.Description)" />
+                </FluentDataGrid>
+            </div>
+        }
+
+    }
+    else
+    {
+        <FluentProgressRing></FluentProgressRing>
+    }
+
+}
+

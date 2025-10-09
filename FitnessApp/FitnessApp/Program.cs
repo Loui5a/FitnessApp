@@ -12,6 +12,10 @@ namespace FitnessApp
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddDbContext<FitnessContext>(options =>
+                options.UseNpgsql("Host=db;Username=lmb;Password=YVFt4huiVSI8ja;Database=FitnessappDB")
+            );
+
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveWebAssemblyComponents()
@@ -23,6 +27,11 @@ namespace FitnessApp
                 options.ValidateClassNames = false;
             });
             var app = builder.Build();
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<FitnessContext>();
+                 db.Database.Migrate();
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -45,9 +54,8 @@ namespace FitnessApp
                 .AddInteractiveWebAssemblyRenderMode()
                 .AddAdditionalAssemblies(typeof(Client._Imports).Assembly)
                 .AddInteractiveServerRenderMode();
-
-            var context = new FitnessContext();
-            context.Database.Migrate();
+            
+            // Update Database to newest version
 
             app.Run();
         }
