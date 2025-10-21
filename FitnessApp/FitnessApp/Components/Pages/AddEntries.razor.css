@@ -28,7 +28,6 @@ div {
     font-size: 15px;
 }
 
-
 .EntriesLabel {
     font-weight: bold;
 }
@@ -36,18 +35,11 @@ button {
     font-weight: bold;
 }
 
-.ExerciseTable {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    text-align: left;
-    padding: 8px;
-    border-radius: 10px;
-}
-
 table, th, td {
     border: 1px solid #558BD9;
     padding-left: 7px;
+    padding-bottom: 22px;
     font-size: 15px;
 }
+
 

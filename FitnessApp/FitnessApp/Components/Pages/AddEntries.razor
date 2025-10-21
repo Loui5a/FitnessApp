@@ -6,6 +6,7 @@
 <h2>Add exercises to database</h2>
 
 <body>
+    <FluentDialogProvider @rendermode="RenderMode.InteractiveServer" />
     <EditForm Model="Model" OnValidSubmit="Submit" FormName="ExerciseAdd">
         <DataAnnotationsValidator />
         <ValidationSummary />
@@ -53,7 +54,7 @@
 </body>
 
 <FluentAccordion>
-    <FluentAccordionItem Heading="Filter(s)" Expanded="true">
+    <FluentAccordionItem Heading="Filtering" Expanded="true">
         <FluentIcon Value="@(new Icons.Regular.Size20.FilterAdd())" Color="@Color.Neutral" Slot="start" />
         <FluentGrid Spacing="1" Justify="JustifyContent.FlexStart" Style="padding: 10px;">
             <FluentGridItem xs="12" sm="6" md="4">
@@ -93,13 +94,13 @@
                     TGridItem="ExerciseModel"
                     Loading="loading"
                     Pagination="pagination">
-        <PropertyColumn Property="@(c => c!.Type)" Sortable="true" />
+        <PropertyColumn Property="@(c => c!.Type)" Sortable="true"/>
         <PropertyColumn Property="@(c => c!.Category)" Sortable="true" />
-        <PropertyColumn Property="@(c => c!.Exercise)" Sortable="true" />
+        <PropertyColumn Title="Exercise" Property="@(c => c!.Exercise)" Sortable="true" />
         <PropertyColumn Title="Duration" Property="@(c => c!.DefaultDuration)" Tooltip="true" />
         <PropertyColumn Property="@(c => c!.Description)" />
         <TemplateColumn Title="Actions" Align="@Align.End">
-            <FluentButton aria-label="Edit item" IconEnd="@(new Icons.Regular.Size16.Edit())" OnClick="@(() => Console.WriteLine("Edit clicked"))" />
+            <FluentButton aria-label="Edit item" IconEnd="@(new Icons.Regular.Size16.Edit())" OnClick="@(() => EditExerciseAsync(context.Id))" />
             <FluentButton aria-label="Delete item" IconEnd="@(new Icons.Regular.Size16.Delete())" OnClick="@(() => Delete(context.Id))" />
         </TemplateColumn>
     </FluentDataGrid>

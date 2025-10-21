@@ -1,4 +1,5 @@
-﻿using FitnessApp.Database;
+﻿using FitnessApp.Components.Dialogs;
+using FitnessApp.Database;
 using FitnessApp.Database.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
@@ -18,46 +19,68 @@ namespace FitnessApp.Components.Pages
         string? _TypeFilter = "";
         string? _CategoryFilter = "";
         string? _ExerciseFilter = "";
+        private bool _trapFocus = true;
+        private bool _modal = true;
 
         [SupplyParameterFromForm]
         private ExercisePlaceholder Model { get; set; } = new();
         private IQueryable<ExerciseModel>? Exercises { get; set; }
+        
         [Inject]
         FitnessContext ContextExerciseEntry { get; set; } = default!;
         GridItemsProviderRequest<ExerciseModel>? CurrentReq;
-
+        
+        [Inject]
+        public IDialogService DialogService { get; set; } = default!;
         protected async Task RefreshItemsAsync(GridItemsProviderRequest<ExerciseModel> req)
         {
             loading = true;
             await InvokeAsync(StateHasChanged);
 
-            var query = ContextExerciseEntry.ExerciseModels.Skip(req.StartIndex).Take(req.Count ?? 10);
-
+            var query = ContextExerciseEntry.ExerciseModels.AsEnumerable();
 
             if (!string.IsNullOrWhiteSpace(_TypeFilter))
             {
-                query = query.Where(e => e.Type.Contains(_TypeFilter));
+                query = query.Where(e => e.Type.ToLower().Contains(_TypeFilter));
             }
                 
             else if(!string.IsNullOrWhiteSpace(_CategoryFilter))
             {
-                query = query.Where(e => e.Category.Contains(_CategoryFilter));
+                query = query.Where(e => e.Category.ToLower().Contains(_CategoryFilter));
             }
             else if (!string.IsNullOrWhiteSpace(_ExerciseFilter))
             {
-                query = query.Where(e => e.Exercise.Contains(_ExerciseFilter));
+                query = query.Where(e => e.Exercise.ToLower().Contains(_ExerciseFilter));
             }
 
             var sort = req.GetSortByProperties().FirstOrDefault();
             if (req.SortByColumn != null && !string.IsNullOrEmpty(sort.PropertyName))
             {
-                query = req.GetSortByProperties().FirstOrDefault().Direction != SortDirection.Descending
-                    ? query .OrderBy(e => req.SortByColumn)
-                    : query.OrderByDescending(e => req.SortByColumn);
+                switch (req.SortByColumn.Title)
+                {
+                    case "Type":
+                        query = sort.Direction != SortDirection.Descending
+                            ? query.OrderBy(e => e.Type)
+                            : query.OrderByDescending(e => e.Type);
+                        break;
+                    case "Category":
+                        query = sort.Direction != SortDirection.Descending
+                            ? query.OrderBy(e => e.Category)
+                            : query.OrderByDescending(e => e.Category);
+                        break;
+                    case "Exercise":
+                        query = sort.Direction != SortDirection.Descending
+                            ? query.OrderBy(e => e.Exercise)
+                            : query.OrderByDescending(e => e.Exercise);
+                        break;
+                    default:
+                        throw new NotImplementedException($"{req.SortByColumn.Title} not found in the switch-case");
+                }
             }
+            //query = query.Skip(req.StartIndex).Take(req.Count ?? 10);
 
             Exercises = query.AsQueryable();
-            await pagination.SetTotalItemCountAsync(Exercises.Count());
+            await pagination.SetTotalItemCountAsync(await ContextExerciseEntry.ExerciseModels.CountAsync());
 
             loading = false;
             await InvokeAsync(StateHasChanged);
@@ -92,6 +115,27 @@ namespace FitnessApp.Components.Pages
             await OnInitializedAsync();
         }
 
+        public async Task EditExerciseAsync(int exerciseId)
+        {
+            var exercise = await ContextExerciseEntry.ExerciseModels.FirstAsync(e => e.Id == exerciseId);
+           
+            DialogParameters parameters = new()
+            {
+                Title = "Edit Program",
+                PrimaryAction = "Edit",
+                SecondaryAction = "Cancel",
+                Width = "500px",
+                TrapFocus = _trapFocus,
+                Modal = _modal,
+                PreventScroll = true
+            };
+            IDialogReference dialog = await DialogService.ShowDialogAsync<EditExerciseDialog>(exercise, parameters);
+            DialogResult? result = await dialog.Result;
+            //if (result.Cancelled) return;
+            //fitnessContext.Remove(ActiveProgram);
+            //await fitnessContext.SaveChangesAsync();
+            //await OnInitializedAsync();
+        }
         public async Task Delete(int exerciseId)
         {
             var exercise = await ContextExerciseEntry.ExerciseModels.FirstAsync(e => e.Id == exerciseId);
