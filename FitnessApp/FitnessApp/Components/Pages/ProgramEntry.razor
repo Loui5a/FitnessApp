@@ -1,37 +1,43 @@
 ﻿@page "/ProgramEntry"
 @using FitnessApp.Database.Models
 @rendermode InteractiveServer
-<h2>Create or Edit Programs</h2>
-<FluentDialogProvider @rendermode="RenderMode.InteractiveServer" />
-<FluentStack Orientation="Orientation.Horizontal" HorizontalAlignment="HorizontalAlignment.Left">
-    <FluentSelect TOption="ProgramModel"
-                  Label="Select a program"
-                  Items="@Programs"
-                  Id="programs-listbox"
-                  Width="200px"
-                  Height="250px"
-                  Placeholder="Make a selection..."
-                  OptionText="@(p => p.Name)"
-                  @bind-SelectedOption="@ActiveProgram" 
-    />
-                  
-    <FluentButton IconStart="@(new Icons.Regular.Size16.Add())"
-                    Disabled="loading"
-                  OnClick="AddProgram">
-        Add
-    </FluentButton>
-    <FluentButton IconStart="@(new Icons.Regular.Size16.Delete())"
-                    Appearance="Appearance.Accent"
-                    Loading="loading"
-                  OnClick="DeleteProgramAsync">
-        Delete
-    </FluentButton>
+<FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Left" Style="padding: 15px">
+    <h2>Create or Edit Programs</h2>
+    <FluentDialogProvider @rendermode="RenderMode.InteractiveServer" />
+    <FluentStack Orientation="Orientation.Horizontal" HorizontalAlignment="HorizontalAlignment.Left">
+        <FluentSelect TOption="ProgramModel"
+                      Label="Select a program"
+                      Items="@Programs"
+                      Id="programs-listbox"
+                      Width="200px"
+                      Height="250px"
+                      Placeholder="Make a selection..."
+                      OptionText="@(p => p.Name)"
+                      @bind-SelectedOption="@ActiveProgram" />
+
+        <FluentButton IconStart="@(new Icons.Regular.Size16.Add())"
+                      Disabled="loading"
+                      OnClick="AddProgram">
+            Add
+        </FluentButton>
+        <FluentButton IconStart="@(new Icons.Regular.Size16.Delete())"
+                      Appearance="Appearance.Accent"
+                      Loading="loading"
+                      OnClick="DeleteProgramAsync">
+            Delete
+        </FluentButton>
+    </FluentStack>
 </FluentStack>
 <FluentGrid Justify="JustifyContent.FlexStart" Spacing="3">
     <FluentGridItem xs="12" sm="6">
         <h5>Exercises</h5>
         <FluentSortableList Id="Exercises" Group="cloning" Clone="true" OnRemove="@AddToProgram" Items="@AllExercises" Context="exercise">
-            <ItemTemplate>@exercise.Exercise</ItemTemplate>
+            <ItemTemplate>
+                <FluentStack Orientation="Orientation.Horizontal">
+                    <div style="text-align:left">@exercise.Type</div> 
+                    <div style="text-align:right">@exercise.Exercise</div>
+                </FluentStack>
+                </ItemTemplate>
         </FluentSortableList>
     </FluentGridItem>
     <FluentGridItem xs="12" sm="6">

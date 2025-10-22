@@ -118,7 +118,7 @@ namespace FitnessApp.Components.Pages
         public async Task EditExerciseAsync(int exerciseId)
         {
             var exercise = await ContextExerciseEntry.ExerciseModels.FirstAsync(e => e.Id == exerciseId);
-           
+
             DialogParameters parameters = new()
             {
                 Title = "Edit Program",
@@ -131,11 +131,20 @@ namespace FitnessApp.Components.Pages
             };
             IDialogReference dialog = await DialogService.ShowDialogAsync<EditExerciseDialog>(exercise, parameters);
             DialogResult? result = await dialog.Result;
-            //if (result.Cancelled) return;
-            //fitnessContext.Remove(ActiveProgram);
-            //await fitnessContext.SaveChangesAsync();
-            //await OnInitializedAsync();
+            if (result.Cancelled) return;
+            if (result.Data is not null)
+            {
+                ExerciseModel? editedExercise = result.Data as ExerciseModel;
+                ContextExerciseEntry.ExerciseModels.Update(editedExercise!);
+                await ContextExerciseEntry.SaveChangesAsync();
+                await OnInitializedAsync();
+            }
+            else
+            {
+                // Handle the case where result.Data is null
+            }
         }
+
         public async Task Delete(int exerciseId)
         {
             var exercise = await ContextExerciseEntry.ExerciseModels.FirstAsync(e => e.Id == exerciseId);

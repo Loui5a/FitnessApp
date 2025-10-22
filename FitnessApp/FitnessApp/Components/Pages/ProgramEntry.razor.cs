@@ -29,7 +29,7 @@ namespace FitnessApp.Components.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            AllExercises = await fitnessContext.ExerciseModels.ToListAsync();
+            AllExercises = await fitnessContext.ExerciseModels.OrderBy(a => a.Exercise).ToListAsync();
             await InvokeAsync(StateHasChanged);
             loading = false;
             Programs = await fitnessContext.ProgramModels.ToListAsync();
