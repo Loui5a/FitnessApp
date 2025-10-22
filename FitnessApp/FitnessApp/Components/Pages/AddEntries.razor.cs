@@ -124,7 +124,7 @@ namespace FitnessApp.Components.Pages
                 Title = "Edit Program",
                 PrimaryAction = "Edit",
                 SecondaryAction = "Cancel",
-                Width = "500px",
+                Width = "600px",
                 TrapFocus = _trapFocus,
                 Modal = _modal,
                 PreventScroll = true

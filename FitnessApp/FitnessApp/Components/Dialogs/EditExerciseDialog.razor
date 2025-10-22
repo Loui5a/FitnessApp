@@ -1,4 +1,12 @@
 ﻿@using FitnessApp.Database.Models
 
 
-<FluentLabel Typo="Typography.Header"> Are you sure you want to delete  </FluentLabel>
+
+
+<FluentDialogBody>
+    <FluentTextField @bind-Value="@Content.Type">Type:</FluentTextField>
+    <FluentTextField @bind-Value="@Content.Category">Category:</FluentTextField>
+    <FluentTextField @bind-Value="@Content.Exercise">Exercise:</FluentTextField>
+    <FluentTextField @bind-Value="@Content.DefaultDuration">Default Duration:</FluentTextField>
+    <FluentTextField @bind-Value="@Content.Description" Style="width: 100%">Description:</FluentTextField>
+</FluentDialogBody>
