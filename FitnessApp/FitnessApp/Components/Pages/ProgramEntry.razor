@@ -1,6 +1,8 @@
 ﻿@page "/ProgramEntry"
 @using FitnessApp.Database.Models
 @rendermode InteractiveServer
+
+<!-- A select for choosing current program, as well as a delete and Add button both directing to a Dialog -->
 <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Left" Style="padding: 15px">
     <h2>Create or Edit Programs</h2>
     <FluentDialogProvider @rendermode="RenderMode.InteractiveServer" />
@@ -9,7 +11,7 @@
                       Label="Select a program"
                       Items="@Programs"
                       Id="programs-listbox"
-                      Width="200px"
+                      Width="200px" 
                       Height="250px"
                       Placeholder="Make a selection..."
                       OptionText="@(p => p.Name)"
@@ -28,6 +30,7 @@
         </FluentButton>
     </FluentStack>
 </FluentStack>
+<!-- Datagrid with two columns; one for all available exercises and one for dragging exercises into a selected program -->
 <FluentGrid Justify="JustifyContent.FlexStart" Spacing="3">
     <FluentGridItem xs="12" sm="6">
         <h5>Exercises</h5>
