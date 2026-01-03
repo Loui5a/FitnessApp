@@ -92,7 +92,8 @@
                     GenerateHeader="GenerateHeaderOption.Sticky"
                     TGridItem="ExerciseModel"
                     Loading="loading"
-                    Pagination="pagination">
+                    Pagination="pagination"
+                    AutoFit="true">
         <PropertyColumn Property="@(c => c!.Type)" Sortable="true"/>
         <PropertyColumn Property="@(c => c!.Category)" Sortable="true" />
         <PropertyColumn Title="Exercise" Property="@(c => c!.Exercise)" Sortable="true" />

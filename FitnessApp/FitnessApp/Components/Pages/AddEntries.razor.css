@@ -1,6 +1,7 @@
 ﻿
-body {
+body, html {
     background-color: #F1F4FC;
+    font-weight: normal;
 }
 
 h2 {
@@ -41,5 +42,7 @@ table, th, td {
     padding-bottom: 22px;
     font-size: 15px;
 }
+
+
 
 

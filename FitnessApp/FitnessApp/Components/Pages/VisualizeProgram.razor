@@ -36,13 +36,14 @@ else
                                 GenerateHeader="GenerateHeaderOption.Sticky"
                                 RefreshItems="RefreshItemsAsync"
                                 TGridItem="ExerciseModel"
-                                Loading="loadingProgram">
+                                Loading="loadingProgram"
+                                AutoFit = "true">
 
                     <PropertyColumn Property="@(c => c!.Type)" Sortable="true" />
                     <PropertyColumn Property="@(c => c!.Category)" Sortable="true" />
                     <PropertyColumn Property="@(c => c!.Exercise)" Sortable="true" />
                     <PropertyColumn Title="Duration" Property="@(c => c!.DefaultDuration)" Tooltip="true" />
-                    <PropertyColumn Property="@(c => c!.Description)" />
+                    <PropertyColumn Property="@(c => c!.Description)"/>
                 </FluentDataGrid>
             </div>
         }
