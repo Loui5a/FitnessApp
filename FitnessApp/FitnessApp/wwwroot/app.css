@@ -55,3 +55,9 @@ h1:focus {
 .darker-border-checkbox.form-check-input {
     border-color: #929292;
 }
+/* Scope to this grid instance (you already set Class="program-grid" on the FluentDataGrid) */
+.program-grid .column-header .col-title-text {
+    font-weight: bold !important;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    font-size: 16px !important;
+}

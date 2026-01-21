@@ -6,43 +6,43 @@
 <h2>Add exercises to database</h2>
 
 <body>
-    <FluentDialogProvider @rendermode="RenderMode.InteractiveServer" />
-    <EditForm Model="Model" OnValidSubmit="Submit" FormName="ExerciseAdd">
+    <FluentDialogProvider @rendermode="RenderMode.InteractiveServer" />  
+    <EditForm Model="PlaceholderModel" OnValidSubmit="Submit" FormName="ExerciseAdd">
         <DataAnnotationsValidator />
         <ValidationSummary />
         <div>
             <label class="EntriesLabel">
                 Type:
                 <br />
-                <InputText placeholder="Ex. lower extremities" @bind-Value="Model.Type" />
+                <InputText placeholder="Ex. lower extremities" @bind-Value="PlaceholderModel.Type" />
             </label>
         </div>
         <div>
             <label class="EntriesLabel">
                 Category:
                 <br />
-                <InputText placeholder="Ex. warm-up" @bind-Value="Model.Category" />
+                <InputText placeholder="Ex. warm-up" @bind-Value="PlaceholderModel.Category" />
             </label>
         </div>
         <div>
             <label class="EntriesLabel">
                 Exercise:
                 <br />
-                <InputText placeholder="Ex. dumbbell curls" size="60" @bind-Value="Model.Exercise" />
+                <InputText placeholder="Ex. dumbbell curls" size="60" @bind-Value="PlaceholderModel.Exercise" />
             </label>
         </div>
         <div>
             <label class="EntriesLabel">
                 Default Duration:
                 <br />
-                <InputText placeholder="Ex 12 reps, 3 sets" @bind-Value="Model.DefaultDuration" />
+                <InputText placeholder="Ex 12 reps, 3 sets" @bind-Value="PlaceholderModel.DefaultDuration" />
             </label>
         </div>
         <div>
             <label class="EntriesLabel">
                 Description:
                 <br />
-                <InputText placeholder="Describe how to perform the exercise" size="100" @bind-Value="Model.Description" />
+                <InputText placeholder="Describe how to perform the exercise" size="100" @bind-Value="PlaceholderModel.Description" />
             </label>
             <br />
         </div>
@@ -86,6 +86,7 @@
 
 <div style="height: 484px; overflow:auto;" tabindex="-1">
     <FluentDataGrid @ref="dataGrid"
+                    Class="program-grid"
                     Items="Exercises"
                     RefreshItems="RefreshItemsAsync"
                     RowSize="DataGridRowSize.Medium"

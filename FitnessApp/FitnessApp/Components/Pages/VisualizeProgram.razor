@@ -32,12 +32,13 @@ else
             <div style="height: 484px; overflow:auto;" tabindex="-1">
                 <FluentDataGrid @ref="dataGrid"
                                 Items="Exercises"
+                                Class="program-grid"
                                 RowSize="DataGridRowSize.Small"
                                 GenerateHeader="GenerateHeaderOption.Sticky"
                                 RefreshItems="RefreshItemsAsync"
                                 TGridItem="ExerciseModel"
                                 Loading="loadingProgram"
-                                AutoFit = "true">
+                                AutoFit="true">
 
                     <PropertyColumn Property="@(c => c!.Type)" Sortable="true" />
                     <PropertyColumn Property="@(c => c!.Category)" Sortable="true" />

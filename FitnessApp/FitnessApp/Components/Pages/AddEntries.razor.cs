@@ -28,7 +28,7 @@ namespace FitnessApp.Components.Pages
         private bool _modal = true; // Make the dialog modal (disables background interaction)
 
         [SupplyParameterFromForm]
-        private ExercisePlaceholder Model { get; set; } = new(); // used as a placeholder for bind-Value in FluentDialogProvider
+        private ExercisePlaceholder PlaceholderModel { get; set; } = new(); // used as a placeholder for bind-Value in FluentDialogProvider
         
         [Inject]
         FitnessContext ContextExerciseEntry { get; set; } = default!; // Injecting the FitnessContext for database operations
@@ -41,21 +41,21 @@ namespace FitnessApp.Components.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            Exercises = ContextExerciseEntry.ExerciseModels.AsQueryable();
+            Exercises = ContextExerciseEntry.ExerciseModels.AsQueryable(); 
             await InvokeAsync(StateHasChanged);
         }
         private async Task Submit()
         {
             ContextExerciseEntry.ExerciseModels.Add(new ExerciseModel
             {
-                Type = Model.Type!,
-                Category = Model.Category!,
-                Exercise = Model.Exercise!,
-                DefaultDuration = Model.DefaultDuration!,
-                Description = Model.Description!,
+                Type = PlaceholderModel.Type!,
+                Category = PlaceholderModel.Category!,
+                Exercise = PlaceholderModel.Exercise!,
+                DefaultDuration = PlaceholderModel.DefaultDuration!,
+                Description = PlaceholderModel.Description!,
             });
             await ContextExerciseEntry.SaveChangesAsync();
-            Model = new();
+            PlaceholderModel = new();
             await OnInitializedAsync();
         }
 
@@ -119,17 +119,19 @@ namespace FitnessApp.Components.Pages
             CurrentReq = req;
         }
 
-        public void ClearFilters()
+        public async Task ClearFilters()
         /// Clears all the filters applied in the FluentAccordion for filtering according to Type/Category/Exercise.
         {
             _TypeFilter = null;
             _CategoryFilter = null;
             _ExerciseFilter = null;
+            CurrentReq = null;
+            await OnInitializedAsync();
         }
 
         public async Task DataGridRefreshDataAsync()
         {
-            await dataGrid.RefreshDataAsync(true);
+            await dataGrid.RefreshDataAsync(true); // Refresh the data grid asynchronously 
         }
 
 
@@ -146,9 +148,9 @@ namespace FitnessApp.Components.Pages
                 PrimaryAction = "Edit",
                 SecondaryAction = "Cancel",
                 Width = "600px",
-                TrapFocus = _trapFocus,
-                Modal = _modal,
-                PreventScroll = true
+                TrapFocus = _trapFocus, // Enabling focus trapping within the dialog
+                Modal = _modal, // Making the dialog modal (disables background interaction)
+                PreventScroll = true // Prevent background scrolling when the dialog is open 
             }; // Configuring dialog parameters
             IDialogReference dialog = await DialogService.ShowDialogAsync<EditExerciseDialog>(exercise, parameters); // Showing the dialog with the exercise data
             DialogResult? result = await dialog.Result;
