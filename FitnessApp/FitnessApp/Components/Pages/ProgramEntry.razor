@@ -3,10 +3,10 @@
 @rendermode InteractiveServer
 
 <!-- A select for choosing current program, as well as a delete and Add button both directing to a Dialog -->
-<FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Left" Style="padding: 15px">
+<FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Left">
     <h2>Create or Edit Programs</h2>
     <FluentDialogProvider @rendermode="RenderMode.InteractiveServer" />
-    <FluentStack Orientation="Orientation.Horizontal" HorizontalAlignment="HorizontalAlignment.Left">
+    <FluentStack Orientation="Orientation.Horizontal" HorizontalAlignment="HorizontalAlignment.Left" Style="padding-bottom:20px">
         <FluentSelect TOption="ProgramModel"
                       Label="Select a program"
                       Items="@Programs"
@@ -19,7 +19,7 @@
 
         <FluentButton IconStart="@(new Icons.Regular.Size16.Add())"
                       Disabled="loading"
-                      OnClick="AddProgram">
+                      OnClick="AddProgramAsync">
             Add
         </FluentButton>
         <FluentButton IconStart="@(new Icons.Regular.Size16.Delete())"
@@ -29,30 +29,38 @@
             Delete
         </FluentButton>
     </FluentStack>
-</FluentStack>
+
 <!-- Datagrid with two columns; one for all available exercises and one for dragging exercises into a selected program -->
-<FluentGrid Justify="JustifyContent.FlexStart" Spacing="3">
-    <FluentGridItem xs="12" sm="6">
+    <FluentGrid Justify="JustifyContent.FlexStart" Spacing="10" Style="padding-bottom:20px;width:1500px">
+    <FluentGridItem xs="12" sm="5">
         <h5>Exercises</h5>
         <FluentSortableList Id="Exercises" Group="cloning" Clone="true" OnRemove="@AddToProgram" Items="@AllExercises" Context="exercise">
             <ItemTemplate>
-                <FluentStack Orientation="Orientation.Horizontal">
-                    <div style="text-align:left">@exercise.Type</div> 
-                    <div style="text-align:right">@exercise.Exercise</div>
+                <FluentStack Orientation="Orientation.Horizontal" Style="display:flex; justify-content:space-between; width:100%">
+                    <div style="font-weight:bold">@exercise.Type</div> 
+                    <div style="text-align:left">@exercise.Exercise</div>
                 </FluentStack>
                 </ItemTemplate>
         </FluentSortableList>
     </FluentGridItem>
-    <FluentGridItem xs="12" sm="6">
+    <FluentGridItem xs="12" sm="5">
         <h5>Program</h5>
         <FluentSortableList Id="programs" Group="cloning" OnUpdate="@ReorderProgramExercises" OnRemove="@RemoveFromProgram" Items="@ProgramExercises" Context="exercise">
-            <ItemTemplate>@exercise.Exercise</ItemTemplate>
+            <ItemTemplate>
+                <FluentStack Orientation="Orientation.Horizontal" Style="display:flex; justify-content:space-between; width:100%">
+                    <div style="font-weight:bold">@exercise.Type</div>
+                    <div style="text-align:left">@exercise.Exercise</div>
+                </FluentStack>
+            </ItemTemplate>
         </FluentSortableList>
     </FluentGridItem>
+    </FluentGrid>
+
     <FluentButton IconStart="@(new Icons.Regular.Size16.Add())"
                   Appearance="Appearance.Accent"
                   Loading="loading"
                   OnClick="Submit">
         Submit
     </FluentButton>
-</FluentGrid>
+
+</FluentStack>

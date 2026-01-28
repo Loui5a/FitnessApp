@@ -41,7 +41,7 @@ namespace FitnessApp.Components.Pages
             Programs = await fitnessContext.ProgramModels.ToListAsync(); 
         }
         #region Add/Delete Program
-        private async Task AddProgram()
+        private async Task AddProgramAsync()
         // Method to add a new program using a dialog (AddDialog.razor)
         {
             if (ActiveProgram == null) ActiveProgram = new ProgramModel() { Name = string.Empty };
