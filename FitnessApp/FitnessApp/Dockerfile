@@ -9,11 +9,16 @@ EXPOSE 8081
 
 
 # This stage is used to build the service project. based on Linux distrobution Debian Bookworm
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build 
+FROM debian:bookworm-slim AS build 
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["./FitnessApp/FitnessApp/FitnessApp.csproj", "FitnessApp/FitnessApp/"]
 COPY ["./FitnessApp/FitnessApp.Client/FitnessApp.Client.csproj", "FitnessApp/FitnessApp.Client/"]
+RUN wget https://packages.microsoft.com/config/debian/13/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb # adds the Microsoft package signing key to your list of trusted keys and add the package repository
+RUN sudo apt-get update && \ sudo apt-get install -y dotnet-sdk-8.0 # install the .NET SDK
+RUN sudo apt-get update && \  sudo apt-get install -y aspnetcore-runtime-8.0 # install the ASP.NET Core runtime
 RUN dotnet restore "./FitnessApp/FitnessApp/FitnessApp.csproj"
 COPY . .
 WORKDIR "/src/FitnessApp/FitnessApp"
